@@ -50,7 +50,7 @@ function Home() {
 
   return (
     <div className="home">
-      <h2>Google Stock Price Overview (Mock)</h2>
+      <h2>Safaricom Stock Price </h2>
       {stockData ? (
         <StockChart stockData={stockData} />
       ) : (
