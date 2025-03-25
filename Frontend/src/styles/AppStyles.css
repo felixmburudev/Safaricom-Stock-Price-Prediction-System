@@ -124,7 +124,6 @@
 
 
 
-  /* Add to src/styles/AppStyles.css */
 
 /* Navbar Styles */
 .navbar {
@@ -267,7 +266,6 @@
   }
 
 
-  /* Add to src/styles/AppStyles.css */
 
 /* Prediction Button Styles */
 .predict-button {
@@ -325,67 +323,86 @@
     }
   }
 
-  /* Add to src/styles/AppStyles.css */
+/* Stock Chart Container */
+.stock-chart-container {
+  margin-top: 2rem;
+}
 
-/* Stock Chart Styles */
-.stock-chart {
-  background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* Zoom Controls */
+.zoom-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.zoom-controls button {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
-  overflow-x: auto; /* Allows horizontal scrolling on small screens */
-  border: 1px solid rgba(0, 168, 107, 0.1);
 }
 
-.stock-chart:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 168, 107, 0.15);
+.zoom-controls button.active,
+.zoom-controls button:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
 }
 
-.stock-chart::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), #00c47d);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+/* Volume Chart */
+.volume-chart {
+  margin-top: 1rem;
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.stock-chart:hover::before {
-  transform: scaleX(1);
+/* Stock Information */
+.stock-info {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Make chart responsive */
-.stock-chart svg {
-  max-width: 100%;
-  height: auto;
+.stock-info h3 {
+  color: var(--secondary-color);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Style the axis labels */
-.stock-chart .axis text {
-  fill: var(--secondary-color);
-  font-weight: 500;
+.stock-info p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text-color);
 }
 
-/* Responsive adjustments */
+.stock-info strong {
+  color: var(--primary-color);
+}
+
+/* Responsive Adjustments */
 @media (max-width: 630px) {
-  .stock-chart {
-    padding: 1rem;
-    border-radius: 15px;
+  .zoom-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  .stock-chart > div {
-    width: 100% !important; /* Override fixed width */
+  .zoom-controls button {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .stock-info {
+    padding: 1rem;
   }
 }
 
-/* Update or append to src/styles/AppStyles.css */
 
 /* Home Page Styles */
 .home {
@@ -437,5 +454,71 @@
 
   .home h2 {
     font-size: 2rem;
+  }
+}
+
+
+
+
+/* Stock Table Container */
+.stock-table-container {
+  margin: 2rem 0;
+  max-height: 300px; /* Limit table height */
+  overflow-y: auto; /* Vertical scrollbar */
+  overflow-x: auto; /* Horizontal scrollbar for small screens */
+}
+
+/* Stock Table */
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Table Headers */
+.stock-table th {
+  background: var(--primary-color); 
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Table Cells */
+.stock-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  color: var(--text-color);
+}
+
+/* Alternating Row Colors */
+.stock-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Hover Effect on Rows */
+.stock-table tbody tr:hover {
+  background: rgba(0, 168, 107, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 630px) {
+  .stock-table th,
+  .stock-table td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .stock-table-container {
+    margin: 1rem 0;
+    max-height: 200px; /* Smaller height on mobile */
   }
 }

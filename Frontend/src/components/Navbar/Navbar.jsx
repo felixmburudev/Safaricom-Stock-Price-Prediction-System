@@ -40,6 +40,11 @@ function Navbar() {
             </Link>
           </li>
           <li>
+            <Link to="/training" onClick={handleLinkClick}>
+              Training
+            </Link>
+          </li>
+          <li>
             <Link to="/prediction" onClick={handleLinkClick}>
               Prediction
             </Link>

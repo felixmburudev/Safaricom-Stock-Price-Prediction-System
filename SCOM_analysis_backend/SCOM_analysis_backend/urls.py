@@ -15,8 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path ,include
+from data_loader import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('safaricom-stock-data/', views.get_safaricom_stock_data, name='get_safaricom_stock_data'),
+    path('saved-stock-data/', views.get_saved_stock_data, name='get_saved_stock_data'),]
