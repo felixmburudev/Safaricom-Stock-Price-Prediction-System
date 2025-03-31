@@ -17,8 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path ,include
 from data_loader import views
+from random_forest.views import train_model_view, get_training_progress
+
+from random_forest.views import train_model_view,  get_training_progress
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('safaricom-stock-data/', views.get_safaricom_stock_data, name='get_safaricom_stock_data'),
-    path('saved-stock-data/', views.get_saved_stock_data, name='get_saved_stock_data'),]
+    path('saved-stock-data/', views.get_saved_stock_data, name='get_saved_stock_data'),
+     path('train/', train_model_view, name='train_model'),  
+    path('progress/', get_training_progress, name='training_progress'),
+    ]
