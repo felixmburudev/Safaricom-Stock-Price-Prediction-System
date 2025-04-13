@@ -14,8 +14,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/prediction" element={<Prediction />} />
-          <Route path="/training" element={<Training />} />
+          <Route path="/predict/:ticker" element={<Prediction />} />          <Route path="/training" element={<Training />} />
         </Routes>
       </div>
     </Router>

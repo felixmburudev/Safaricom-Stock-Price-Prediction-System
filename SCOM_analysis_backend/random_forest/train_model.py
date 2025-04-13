@@ -13,12 +13,10 @@ def update_progress(stage, percentage):
     with open(PROGRESS_FILE, 'w') as f:
         json.dump(progress, f)
 
-def train_model():
+def train_model(ticker):
     try:
         update_progress("Fetching data", 0)
-        # ticker = "SAFARICOM.NR"  
-        ticker = "GOOGL"  
-        data = yf.download(ticker, start="2020-01-01", end="2025-03-31")
+        data = yf.download(ticker, start="2000-01-01", end="2025-03-31")
         update_progress("Fetching data", 33)
 
         update_progress("Cleaning and modifying data", 33)
@@ -38,6 +36,7 @@ def train_model():
 
         model_path = os.path.join(settings.BASE_DIR, 'random_forest', 'models', 'rf_model.pkl')
         joblib.dump(model, model_path)
+
         return True
     except Exception as e:
         update_progress("Error", 0)

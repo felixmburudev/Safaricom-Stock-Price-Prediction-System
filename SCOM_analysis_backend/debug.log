@@ -1,0 +1,291 @@
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Received request for ticker: GOOGL
+Looking for model at: C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\models\rf_model.pkl
+Model loaded successfully
+Fetching data for GOOGL from 2025-03-29 to 2025-04-08
+
+1 Failed download:
+['GOOGL']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000169DD734590>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+No data returned for ticker GOOGL
+Bad Request: /predict_price/
+
+1 Failed download:
+['GOOGL']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000169DD6C2C10>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Internal Server Error: /train/
+
+1 Failed download:
+['GOOGL']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000169DD5BC7D0>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Internal Server Error: /train/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Received request for ticker: GOOGL
+Looking for model at: C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\models\rf_model.pkl
+Model loaded successfully
+Fetching data for GOOGL from 2025-03-29 to 2025-04-08
+Data fetched successfully
+Error in predict_price_view: 'DataFrame' object has no attribute 'tolist'
+Traceback (most recent call last):
+  File "C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py", line 54, in predict_price_view
+    prices = data['Close'].tolist()
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mburson\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\pandas\core\generic.py", line 6299, in __getattr__
+    return object.__getattribute__(self, name)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'tolist'
+Internal Server Error: /predict_price/
+Received request for ticker: GOOGL
+Looking for model at: C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\models\rf_model.pkl
+Model loaded successfully
+Fetching data for GOOGL from 2025-03-29 to 2025-04-08
+Data fetched successfully
+Error in predict_price_view: 'DataFrame' object has no attribute 'tolist'
+Traceback (most recent call last):
+  File "C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py", line 54, in predict_price_view
+    prices = data['Close'].tolist()
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mburson\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\pandas\core\generic.py", line 6299, in __getattr__
+    return object.__getattribute__(self, name)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'tolist'
+Internal Server Error: /predict_price/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /safaricom-stock-data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /safaricom-stock-data/
+Watching for file changes with StatReloader
+Received request for ticker: GOOGL
+Looking for model at: C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\models\rf_model.pkl
+Model loaded successfully
+Fetching data for GOOGL from 2025-04-03 to 2025-04-13
+Data fetched successfully
+Error in predict_price_view: 'DataFrame' object has no attribute 'tolist'
+Traceback (most recent call last):
+  File "C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py", line 54, in predict_price_view
+    prices = data['Close'].tolist()
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mburson\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\pandas\core\generic.py", line 6299, in __getattr__
+    return object.__getattribute__(self, name)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'tolist'
+Internal Server Error: /predict_price/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Failed to get ticker 'AVGO' reason: HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002039BC00050>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['AVGO']: YFTzMissingError('possibly delisted; no timezone found')
+Internal Server Error: /train/
+Failed to get ticker 'AVGO' reason: HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002039BBE60D0>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['AVGO']: YFTzMissingError('possibly delisted; no timezone found')
+Internal Server Error: /train/
+Failed to get ticker 'NVDA' reason: HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002039BBE7B10>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['NVDA']: YFTzMissingError('possibly delisted; no timezone found')
+Internal Server Error: /train/
+Failed to get ticker 'MSFT' reason: HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002039BBE7110>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['MSFT']: YFTzMissingError('possibly delisted; no timezone found')
+Internal Server Error: /train/
+Failed to get ticker 'MSFT' reason: HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002039B9D8550>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['MSFT']: YFTzMissingError('possibly delisted; no timezone found')
+Internal Server Error: /train/
+Not Found: /predict
+Not Found: /predict
+Not Found: /predict
+Not Found: /predict
+Not Found: /predict
+Not Found: /predict
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /api/predict
+Not Found: /predict
+Not Found: /predict
+Not Found: /predict
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /stock-data
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /stock-data
+Not Found: /stock-data
+Not Found: /stock-data
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /stock_data/
+Traceback (most recent call last):
+  File "C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py", line 26, in get_stock_data
+    {"date": index.strftime('%Y-%m-%d'), "price": float(price)}
+             ^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'strftime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\mburson\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\mburson\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py", line 35, in get_stock_data
+    traceback.print_exc()  # Log full stack trace
+    ^^^^^^^^^
+NameError: name 'traceback' is not defined. Did you forget to import 'traceback'?
+Internal Server Error: /stock_data/
+Traceback (most recent call last):
+  File "C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py", line 26, in get_stock_data
+    {"date": index.strftime('%Y-%m-%d'), "price": float(price)}
+             ^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'strftime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\mburson\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\mburson\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py", line 35, in get_stock_data
+    traceback.print_exc()  # Log full stack trace
+    ^^^^^^^^^
+NameError: name 'traceback' is not defined. Did you forget to import 'traceback'?
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /train/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /train/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader

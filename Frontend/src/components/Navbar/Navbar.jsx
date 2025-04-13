@@ -19,7 +19,7 @@ function Navbar() {
       <div className="navbar-container">
         <div className="navbar-brand">
           <Link to="/" onClick={handleLinkClick}>
-            <h1>Safaricom Stocks</h1>
+            <h1>Stock Price Prediction System</h1>
           </Link>
         </div>
         
@@ -45,10 +45,16 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/prediction" onClick={handleLinkClick}>
-              Prediction
+            <Link to="/about" onClick={handleLinkClick}>
+              About
             </Link>
           </li>
+          <li>
+            <Link to="/contact" onClick={handleLinkClick}>
+              Contact
+            </Link>   
+          </li>
+          
         </ul>
       </div>
     </nav>

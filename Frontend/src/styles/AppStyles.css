@@ -558,3 +558,31 @@ button:disabled {
   background-color: #9ACD32; /* Pig green (light yellowish-green) */
   transition: width 0.5s ease-in-out;
 }
+
+.prediction-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+input {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
