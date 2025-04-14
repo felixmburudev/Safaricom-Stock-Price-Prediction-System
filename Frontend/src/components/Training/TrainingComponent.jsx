@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../styles/AppStyles.css';
+import './Training_styles.css';
 import companies from "./companies"
 import { useNavigate } from 'react-router-dom';
 const TrainingComponent = () => {

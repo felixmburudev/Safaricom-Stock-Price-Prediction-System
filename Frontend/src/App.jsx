@@ -1,21 +1,27 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import Prediction from './pages/Prediction/Prediction';
 import Training from './pages/Training/Training';
+import About from './pages/About/About';
 import './styles/AppStyles.css';
+import Footer from './pages/Footer/Footer';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="app-wrapper">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/predict/:ticker" element={<Prediction />} />          <Route path="/training" element={<Training />} />
-        </Routes>
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/predict/:ticker" element={<Prediction />} /> 
+            <Route path="/training" element={<Training />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
     </Router>
   );

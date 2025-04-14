@@ -68,8 +68,8 @@ function StockChart({ stockData }) {
       {
         label: 'Safaricom Stock Price',
         data: filteredData.prices,
-        borderColor: '#00a86b', // Safaricom green
-        backgroundColor: 'rgba(0, 168, 107, 0.3)', // Green fill
+        borderColor: '#00a86b', 
+        backgroundColor: 'rgba(0, 168, 107, 0.3)', 
         tension: 0.1,
         fill: true,
       },
