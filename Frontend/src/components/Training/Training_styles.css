@@ -58,4 +58,23 @@
     margin: 10px 0 5px;
     font-weight: 500;
   }
+  .model-params {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .model-params label {
+    font-weight: 500;
+  }
+  
+  input[type="number"],
+  select {
+    padding: 6px 8px;
+    margin-top: 4px;
+    width: 100%;
+    max-width: 300px;
+  }
   

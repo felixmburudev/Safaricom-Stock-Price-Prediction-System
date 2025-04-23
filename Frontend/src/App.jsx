@@ -19,6 +19,8 @@ function App() {
             <Route path="/predict/:ticker" element={<Prediction />} /> 
             <Route path="/training" element={<Training />} />
             <Route path="/about" element={<About />} />
+            <Route path="/predict" element={<Prediction />} />
+
           </Routes>
         </div>
         <Footer />

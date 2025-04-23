@@ -10,25 +10,29 @@ def predict_stock(request):
         ticker = request.GET.get('ticker', '')
         print(f"Received ticker: {ticker}")
 
-        # Get at least 4 recent close prices (for 2 percentage changes)
-        data = yf.download(ticker, period="5d")[['Close']].dropna()
+        data = yf.download(ticker, period="1y")[['Close', 'Volume']].dropna()
         print("Downloaded data:\n", data.tail())
 
         if len(data) < 4:
             return JsonResponse({'error': 'Not enough data to make prediction.'}, status=400)
 
-        # Calculate percentage changes
         close_prices = data['Close']
-        lag1 = float(close_prices.iloc[-2])  # t-1
-        lag2 = float(close_prices.iloc[-3])  # t-2
-        lag3 = float(close_prices.iloc[-4])  # t-3
-        pct_change_lag1 = (lag1 - lag2) / lag2 * 100
-        pct_change_lag2 = (lag2 - lag3) / lag3 * 100
-        input_data = np.array([[pct_change_lag1, pct_change_lag2]])  # Shape: (1, 2)
-        print("Input data for prediction:", input_data)
-        print("Input data shape:", input_data.shape)
+        data['Lag1'] = close_prices.shift(1)  # t-1
+        data['Lag2'] = close_prices.shift(2)  # t-2
+        data['Lag3'] = close_prices.shift(3)  # t-3
+        data['Pct_Change_Lag1'] = (data['Lag1'] - data['Lag2']) / data['Lag2'] * 100
+        data['Pct_Change_Lag2'] = (data['Lag2'] - data['Lag3']) / data['Lag3'] * 100
+        data['SMA_20'] = close_prices.rolling(window=20).mean()  # 20-day Simple Moving Average
+        data['SMA_50'] = close_prices.rolling(window=50).mean()  # 50-day Simple Moving Average
+        data['RSI'] = 100 - (100 / (1 + (close_prices.diff(1).gt(0).rolling(window=14).sum() / close_prices.diff(1).lt(0).rolling(window=14).sum())))
+        data = data.dropna()
 
-        # Load trained model
+        print(f"Processed data with features:\n{data.tail()}")
+
+        input_data = data[['Pct_Change_Lag1', 'Pct_Change_Lag2', 'SMA_20', 'SMA_50', 'RSI']].iloc[-1:].values
+        print("Input data for prediction:", input_data)
+
+        # Load the trained model
         model_path = os.path.join(settings.BASE_DIR, 'random_forest', 'models', 'rf_model.pkl')
         model = joblib.load(model_path)
         print("Expected features:", model.n_features_in_)

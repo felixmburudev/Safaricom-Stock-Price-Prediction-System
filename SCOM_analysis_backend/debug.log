@@ -324,3 +324,203 @@ C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py ch
 Watching for file changes with StatReloader
 C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Failed to get ticker 'PLTR' reason: HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000027513637620>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['PLTR']: YFTzMissingError('possibly delisted; no timezone found')
+Internal Server Error: /train/
+
+1 Failed download:
+['MSFT']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000275139F1BD0>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Internal Server Error: /train/
+
+1 Failed download:
+['MSFT']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000275139F2350>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Internal Server Error: /train/
+
+1 Failed download:
+['MSFT']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000275139F1810>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Internal Server Error: /train/
+
+1 Failed download:
+['TSLA']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000275139F2210>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Internal Server Error: /train/
+Watching for file changes with StatReloader
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+Failed to get ticker 'UNDEFINED' reason: HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B6FB610>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['UNDEFINED']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B6FB890>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Bad Request: /predict/
+Failed to get ticker 'UNDEFINED' reason: HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B243B10>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['UNDEFINED']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B243D90>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Bad Request: /predict/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+Failed to get ticker 'UNDEFINED' reason: HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B243750>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['UNDEFINED']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B6FB750>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Bad Request: /predict/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+
+1 Failed download:
+['AAPL']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B6FBD90>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Bad Request: /predict/
+Failed to get ticker 'WMT' reason: HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B243C50>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+
+1 Failed download:
+['WMT']: YFTzMissingError('possibly delisted; no timezone found')
+Internal Server Error: /train/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$GOOGL: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+
+1 Failed download:
+['GOOGL']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='fc.yahoo.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001687B2439D0>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Bad Request: /predict/
+Watching for file changes with StatReloader
+
+1 Failed download:
+['NVDA']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='query1.finance.yahoo.com', port=443): Max retries exceeded with url: /v1/test/getcrumb (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000022459447B60>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Internal Server Error: /train/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Forbidden (Origin checking failed - http://localhost:5173 does not match any trusted origins.): /train_batch/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /train/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /predict/
+Internal Server Error: /predict/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\predict\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader

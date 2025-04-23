@@ -1,7 +1,10 @@
 // src/pages/Prediction/Prediction.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate }  from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
+import companies from '../../components/Training/companies';
+
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -28,14 +31,17 @@ ChartJS.register(
 );
 
 function Prediction() {
-  const { ticker } = useParams();
-  const [predictionData, setPredictionData] = useState(null);
+  const params = useParams();
+  const navigate = useNavigate();
+  const urlTicker = params.ticker;
+  const [ticker, setTicker] = useState(urlTicker || '');  const [predictionData, setPredictionData] = useState(null);
   const [stockData, setStockData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // Fetch stock data on mount
   useEffect(() => {
+    setTicker(urlTicker || '');
     const fetchStockData = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/stock_data?ticker=${ticker}`);
@@ -51,7 +57,7 @@ function Prediction() {
       }
     };
     fetchStockData();
-  }, [ticker]);
+  }, [urlTicker]);
 
   const handlePredict = async () => {
     setIsLoading(true);
@@ -128,10 +134,30 @@ function Prediction() {
       },
     },
   };
+  const handleTickerChange = (event) => {
+    setTicker(event.target.value);
+};
 
   return (
     <div className="prediction container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Stock Price Prediction</h2>
+      {!urlTicker && (
+        <div>
+          <label htmlFor="ticker-input">Select Company: </label>
+          <select
+            id="ticker-input"
+            value={ticker}
+            onChange={handleTickerChange}
+          >
+            <option value="">Select a company</option>
+            {companies.map((company) => (
+              <option key={company.symbol} value={company.symbol}>
+                {company.name} ({company.symbol})
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       <h3 className="text-xl mb-2">{ticker}</h3>
       <PredictionButton onPredict={handlePredict} />
 

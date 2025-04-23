@@ -4,7 +4,7 @@ import './About.css';
 const About = () => {
   return (
     <div className="about-container">
-      <h1>About the Stock Price Prediction System</h1>
+      <h1>About the Stock Price Prediction Systkjhghvem</h1>
       <p>
         The Stock Price Prediction System is a modern web application designed to help investors, researchers, and financial enthusiasts
         make informed decisions by leveraging machine learning to predict future stock prices. Developed using a full-stack approach, the

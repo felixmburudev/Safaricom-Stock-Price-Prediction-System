@@ -45,14 +45,14 @@ function Navbar() {
             </Link>
           </li>
           <li>
+            <Link to="/predict" onClick={handleLinkClick}>
+              Predict
+            </Link>   
+          </li>
+          <li>
             <Link to="/about" onClick={handleLinkClick}>
               About
             </Link>
-          </li>
-          <li>
-            <Link to="/contact" onClick={handleLinkClick}>
-              Contact
-            </Link>   
           </li>
           
         </ul>
