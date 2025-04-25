@@ -1,25 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import './HomePage.css';
-import axios from 'axios';
-import StockChart from '../../components/StockChart/StockChart';
 import '../../styles/AppStyles.css';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import  companies from '../../components/Training/companies'; 
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const HomePage = () => {
   const [gainers, setGainers] = useState([]);
   const [losers, setLosers] = useState([]);
-  const [ticker, setTicker] = useState('');
   const [error, setError] = useState('');
-  const [stockData, setStockData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [ticker, setTicker] = useState('');
+  const [tickerFound, setTickerFound] = useState(null); // null, true, or false
+  const [chartData, setChartData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [showCompanies, setShowCompanies] = useState(false); // Toggle companies list
 
-  // Fetch top gainers and losers (keeping this lean, like a SpaceX rocket)
   useEffect(() => {
     const fetchTopStocks = async () => {
       try {
-        const API_KEY = 'YOUR_API_KEY'; // Replace with your Alpha Vantage key
+        const API_KEY = 'YOUR_API_KEY';
         const response = await fetch(
           `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${API_KEY}`
         );
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
         const data = await response.json();
 
         const processStocks = (stocks) =>
@@ -34,139 +59,230 @@ const HomePage = () => {
         setLosers(processStocks(data.top_losers || []));
       } catch (err) {
         console.error('Error fetching market movers:', err);
-        setError('Failed to load market data. Hang tight!');
+        setError('Failed to load market data.');
       }
     };
 
     fetchTopStocks();
   }, []);
 
-  // Handle ticker search with max reliability
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const symbol = ticker.trim().toUpperCase();
-    if (!symbol) {
-      setError('Enter a ticker symbol, like TSLA or AAPL!');
+  const validateTicker = (inputTicker) => {
+    const found = companies.find(
+      (company) => company.symbol.toUpperCase() === inputTicker.toUpperCase()
+    );
+    setTickerFound(!!found);
+    return !!found;
+  };
+
+  const handleTickerChange = (e) => {
+    const newTicker = e.target.value.toUpperCase();
+    setTicker(newTicker);
+    if (newTicker) {
+      validateTicker(newTicker);
+    } else {
+      setTickerFound(null);
+    }
+  };
+
+  const handleCompanySelect = (symbol) => {
+    setTicker(symbol);
+    setTickerFound(true);
+    setShowCompanies(false);
+  };
+
+  const toggleCompaniesList = () => {
+    setShowCompanies((prev) => !prev);
+  };
+
+  const handleSearch = async () => {
+    if (!ticker.trim()) {
+      setError('Please enter a valid ticker symbol');
+      setTickerFound(false);
       return;
     }
 
-    setIsLoading(true);
-    setError('');
-    setStockData(null); // Clear previous data for a fresh start
+    if (!validateTicker(ticker)) {
+      setError('Invalid ticker symbol');
+      return;
+    }
 
+    setLoading(true);
+    setError('');
     try {
-      const response = await axios.get(`http://localhost:8000/stock_data?ticker=${symbol}`);
-      const { stock_data } = response.data;
-      alert(JSON.stringify(response.data)); 
-        setStockData(stock_data);
-      // } else {
-      //   setError(`No data found for ${symbol}. Try another ticker!`);
-      // }
+      const response = await fetch(
+        `http://localhost:8000/stock_data?ticker=${encodeURIComponent(ticker)}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers));
+
+      if (!response.ok) {
+        const text = await response.text();
+        console.error('Non-OK response:', response.status, text.slice(0, 200));
+        throw new Error(`Server returned ${response.status}: ${text.slice(0, 100)}...`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Non-JSON response:', text.slice(0, 200));
+        throw new Error('Expected JSON, got: ' + text.slice(0, 100) + '...');
+      }
+
+      const data = await response.json();
+      console.log('Received data:', data);
+
+      if (!data.dates || !data.prices) {
+        console.error('Invalid data format:', data);
+        throw new Error('Invalid data format: missing dates or prices');
+      }
+
+      const labels = data.dates;
+      const prices = data.prices;
+
+      setChartData({
+        labels,
+        datasets: [
+          {
+            label: `${ticker.toUpperCase()} Closing Price`,
+            data: prices,
+            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            tension: 0.1,
+            fill: false,
+          },
+        ],
+      });
     } catch (err) {
       console.error('Error fetching stock data:', err);
-      setError('Whoops! Couldn’t fetch data for that ticker.');
+      setError('Failed to load stock data: ' + err.message);
+      setChartData(null);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
-  // Slice recent data for the table (10 rows, like a Falcon 10... kidding!)
-  const getRecentData = (data, numRows = 10) => {
-    if (!data || !data.dates) return null;
-    const startIndex = Math.max(0, data.dates.length - numRows);
-    return {
-      dates: data.dates.slice(startIndex),
-      prices: data.prices.slice(startIndex),
-      opens: data.opens.slice(startIndex),
-      highs: data.highs.slice(startIndex),
-      lows: data.lows.slice(startIndex),
-      volumes: data.volumes.slice(startIndex),
-    };
-  };
-
-  const recentData = stockData ? getRecentData(stockData) : null;
-
   return (
     <div className="container">
-      <h1 className="main-heading">Stock Dashboard: Conquer the Market!</h1>
+      <h1 className="main-heading">Stock Dashboard</h1>
 
-      {/* Search Form */}
-      <form onSubmit={handleSubmit} className="search-form">
-        <input
-          type="text"
-          placeholder="Enter ticker (e.g., TSLA)"
-          value={ticker}
-          onChange={(e) => setTicker(e.target.value)}
-          className="ticker-input"
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Searching...' : 'Go!'}
-        </button>
-      </form>
       {error && <p className="error">{error}</p>}
 
-      {/* Stock Data Section */}
-      {stockData && recentData ? (
-        <div className="stock-section">
-          <h2>{stockData.name || stockData.symbol} Stock Data</h2>
-
-          {/* Table */}
-          <div className="stock-table-container">
-            <table className="stock-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Open ($)</th>
-                  <th>High ($)</th>
-                  <th>Low ($)</th>
-                  <th>Close ($)</th>
-                  <th>Volume</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentData.dates.map((date, index) => (
-                  <tr key={date}>
-                    <td>{date}</td>
-                    <td>{recentData.opens[index].toFixed(2)}</td>
-                    <td>{recentData.highs[index].toFixed(2)}</td>
-                    <td>{recentData.lows[index].toFixed(2)}</td>
-                    <td>{recentData.prices[index].toFixed(2)}</td>
-                    <td>{recentData.volumes[index].toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Chart */}
-          <div className="stock-chart-container">
-            <StockChart stockData={stockData} />
-          </div>
+      {/* Search Input, Companies Button, and Ticker Status */}
+      <div className="search-section">
+        <input
+          type="text"
+          value={ticker}
+          onChange={handleTickerChange}
+          placeholder="Enter stock ticker (e.g., AAPL)"
+          className="search-input"
+        />
+        <button
+          onClick={toggleCompaniesList}
+          className="companies-button"
+          title="Show company list"
+        >
+          {showCompanies ? 'Hide Companies' : 'Show Companies'}
+        </button>
+        <button onClick={handleSearch} disabled={loading} className="search-button">
+          {loading ? 'Loading...' : 'View Stock Data'}
+        </button>
+        <div className="ticker-status">
+          {tickerFound === true && (
+            <span className="ticker-found">Ticker Found: {ticker}</span>
+          )}
+          {tickerFound === false && ticker && (
+            <span className="ticker-not-found">No Ticker Found</span>
+          )}
         </div>
-      ) : isLoading ? (
-        <p className="loading">Fetching data faster than a Starship launch...</p>
-      ) : (
-        !error && <p className="placeholder">Search a ticker to see the magic!</p>
+      </div>
+
+      {/* Companies List Dropdown */}
+      {showCompanies && (
+        <div className="companies-list">
+          <h3>Available Companies</h3>
+          <ul>
+            {companies.map((company, index) => (
+              <li
+                key={index}
+                onClick={() => handleCompanySelect(company.symbol)}
+                className="company-item"
+              >
+                {company.name} ({company.symbol})
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
 
-      {/* Ticker Tape */}
+      {/* Line Chart */}
+      {chartData && (
+        <div className="chart-section">
+          <h2>Historical Closing Prices for {ticker}</h2>
+          <Line
+            data={chartData}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'top',
+                },
+                title: {
+                  display: true,
+                  text: 'Stock Closing Prices',
+                },
+                tooltip: {
+                  mode: 'index',
+                  intersect: false,
+                },
+              },
+              scales: {
+                y: {
+                  beginAtZero: false,
+                  title: {
+                    display: true,
+                    text: 'Price ($)',
+                  },
+                },
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Date',
+                  },
+                },
+              },
+              hover: {
+                mode: 'nearest',
+                intersect: true,
+              },
+            }}
+          />
+        </div>
+      )}
+
       <div className="ticker-tape">
         {gainers.concat(losers).map((stock, index) => (
           <span key={index}>
-            {stock.symbol}: ${stock.price.toFixed(2)} {stock.change.includes('-') ? '▼' : '▲'} |
+            {stock.symbol}: ${stock.price.toFixed(2)}{' '}
+            {stock.change.includes('-') ? '▼' : '▲'} |
           </span>
         ))}
       </div>
 
-      {/* Top Gainers */}
       <div className="section">
-        <h2 className="section-heading green">Top Gainers: Skyrocketing!</h2>
+        <h2 className="section-heading green">Top Gainers</h2>
         <table className="stock-table">
           <thead>
             <tr>
               <th>Symbol</th>
-              <th>Price ($)</th>
-              <th>% Change</th>
+              <th>Price</th>
+              <th>Change</th>
             </tr>
           </thead>
           <tbody>
@@ -181,15 +297,14 @@ const HomePage = () => {
         </table>
       </div>
 
-      {/* Top Losers */}
       <div className="section">
-        <h2 className="section-heading red">Top Losers: Course Correction</h2>
+        <h2 className="section-heading red">Top Losers</h2>
         <table className="stock-table">
           <thead>
             <tr>
               <th>Symbol</th>
-              <th>Price ($)</th>
-              <th>% Change</th>
+              <th>Price</th>
+              <th>Change</th>
             </tr>
           </thead>
           <tbody>

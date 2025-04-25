@@ -1,7 +1,6 @@
-// src/components/Navbar/Navbar.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/AppStyles.css';
+import './Navbar.css';
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,21 +11,23 @@ function Navbar() {
 
   const handleLinkClick = () => {
     setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar-container">
         <div className="navbar-brand">
-          <Link to="/" onClick={handleLinkClick}>
+          <Link to="/" onClick={handleLinkClick} aria-label="Home">
             <h1>Stock Price Prediction System</h1>
           </Link>
         </div>
         
-        <button 
+        <button
           className="hamburger-menu"
           onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileMenuOpen}
         >
           <span className="hamburger-line"></span>
           <span className="hamburger-line"></span>
@@ -54,7 +55,6 @@ function Navbar() {
               About
             </Link>
           </li>
-          
         </ul>
       </div>
     </nav>

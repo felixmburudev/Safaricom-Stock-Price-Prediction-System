@@ -1,0 +1,188 @@
+/* Navbar Styles */
+:root {
+    --primary-color: #1a1a2e; /* Dark navy for sophistication */
+    --accent-color: #00aaff; /* Vibrant cyan for highlights */
+    --text-color: #ffffff; /* Clean white text */
+    --secondary-text: #e0e0e0; /* Softer white for secondary elements */
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --transition: all 0.3s ease-in-out;
+  }
+  
+  .navbar {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2c2c54 100%); /* Gradient for depth */
+    padding: 1.2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    backdrop-filter: blur(8px); /* Glassmorphism effect */
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  .navbar-container {
+    max-width: 1280px; /* Slightly wider for modern screens */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-brand h1 {
+    color: var(--text-color);
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: 'Inter', sans-serif; /* Modern, clean font */
+    transition: var(--transition);
+  }
+  
+  .navbar-brand h1:hover {
+    color: var(--accent-color); /* Subtle hover effect */
+    transform: scale(1.02); /* Micro-animation */
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+  
+  .nav-links li {
+    margin-left: 2.5rem;
+  }
+  
+  .nav-links a {
+    color: var(--secondary-text);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: var(--transition);
+  }
+  
+  .nav-links a:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px); /* Subtle lift effect */
+  }
+  
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--accent-color);
+    transition: var(--transition);
+    transform: translateX(-50%);
+  }
+  
+  .nav-links a:hover::after {
+    width: 70%; /* Slightly shorter for elegance */
+  }
+  
+  .hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.6rem;
+    position: relative;
+    z-index: 1100;
+  }
+  
+  .hamburger-line {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: var(--text-color);
+    margin: 6px 0;
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+  
+  /* Mobile Menu Styles */
+  @media (max-width: 768px) {
+    .hamburger-menu {
+      display: block;
+    }
+  
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--primary-color);
+      flex-direction: column;
+      padding: 1.5rem;
+      box-shadow: 0 10px 20px var(--shadow-color);
+      border-radius: 0 0 8px 8px; /* Rounded corners for mobile menu */
+    }
+  
+    .nav-links.active {
+      display: flex;
+      animation: slideDown 0.4s ease-in-out;
+    }
+  
+    .nav-links li {
+      margin: 1.2rem 0;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .nav-links a {
+      font-size: 1.2rem;
+      padding: 0.8rem;
+      color: var(--text-color);
+    }
+  
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.05); /* Subtle background on hover */
+      border-radius: 4px;
+    }
+  
+    .nav-links a::after {
+      display: none; /* Remove underline in mobile for cleaner look */
+    }
+  
+    /* Hamburger animation */
+    .hamburger-menu.active .hamburger-line:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+  
+    .hamburger-menu.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+  
+    .hamburger-menu.active .hamburger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* High-resolution screens */
+  @media (min-width: 1440px) {
+    .navbar-brand h1 {
+      font-size: 2.1rem;
+    }
+  
+    .nav-links a {
+      font-size: 1.15rem;
+    }
+  }

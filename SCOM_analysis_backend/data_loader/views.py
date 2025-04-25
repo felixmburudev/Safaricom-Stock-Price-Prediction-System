@@ -9,8 +9,10 @@ def get_stock_data(request):
     try:
         start_date = "2024-03-20"
         end_date = "2025-03-20"
+        ticker = request.GET.get('ticker', 'GOOGL').upper()
+        print(f"Received ticker: {ticker}")  # For debugging
 
-        stock = yf.Ticker("GOOGL")
+        stock = yf.Ticker(ticker)
         data = stock.history(start=start_date, end=end_date)
 
         # Check if data is empty
