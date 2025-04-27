@@ -12,9 +12,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import  companies from '../../components/Training/companies'; 
+import companies from '../../components/Training/companies';
 
-// Register Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -33,33 +32,60 @@ const HomePage = () => {
   const [tickerFound, setTickerFound] = useState(null); // null, true, or false
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [showCompanies, setShowCompanies] = useState(false); // Toggle companies list
+  const [gainersLosersLoading, setGainersLosersLoading] = useState(true); // New loading state
+  const [showCompanies, setShowCompanies] = useState(false);
 
   useEffect(() => {
     const fetchTopStocks = async () => {
+      setGainersLosersLoading(true);
       try {
-        const API_KEY = 'YOUR_API_KEY';
+        const API_KEY = 'YOUR_API_KEY'; // Replace with your Alpha Vantage API key
         const response = await fetch(
           `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${API_KEY}`
         );
+
         if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          const text = await response.text();
+          console.error('Top Gainers/Losers API error:', response.status, text);
+          throw new Error(`HTTP ${response.status}: ${text.slice(0, 100)}...`);
         }
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          const text = await response.text();
+          console.error('Non-JSON response:', text.slice(0, 200));
+          throw new Error('Expected JSON, got: ' + text.slice(0, 100) + '...');
+        }
+
         const data = await response.json();
+        console.log('Top Gainers/Losers data:', data);
+
+        if (data.Information || data.Error) {
+          throw new Error(data.Information || data.Error || 'Invalid API response');
+        }
+
+        if (!data.top_gainers || !data.top_losers) {
+          throw new Error('Missing top_gainers or top_losers in response');
+        }
 
         const processStocks = (stocks) =>
           stocks.slice(0, 5).map((stock) => ({
             name: stock.ticker,
             symbol: stock.ticker,
-            price: parseFloat(stock.price),
-            change: `${parseFloat(stock.change_percentage).toFixed(2)}%`,
+            price: parseFloat(stock.price) || 0,
+            change: `${parseFloat(stock.change_percentage || 0).toFixed(2)}%`,
           }));
 
-        setGainers(processStocks(data.top_gainers || []));
-        setLosers(processStocks(data.top_losers || []));
+        setGainers(processStocks(data.top_gainers));
+        setLosers(processStocks(data.top_losers));
+        setError('');
       } catch (err) {
         console.error('Error fetching market movers:', err);
-        setError('Failed to load market data.');
+        setError('Failed to load Top Gainers and Losers: ' + err.message);
+        setGainers([]);
+        setLosers([]);
+      } finally {
+        setGainersLosersLoading(false);
       }
     };
 
@@ -167,6 +193,15 @@ const HomePage = () => {
       setLoading(false);
     }
   };
+
+  // Skeleton Loader Component
+  const SkeletonRow = () => (
+    <tr>
+      <td><div className="skeleton skeleton-cell"></div></td>
+      <td><div className="skeleton skeleton-cell"></div></td>
+      <td><div className="skeleton skeleton-cell"></div></td>
+    </tr>
+  );
 
   return (
     <div className="container">
@@ -286,13 +321,29 @@ const HomePage = () => {
             </tr>
           </thead>
           <tbody>
-            {gainers.map((stock, index) => (
-              <tr key={index}>
-                <td>{stock.symbol}</td>
-                <td>{stock.price.toFixed(2)}</td>
-                <td className="green_text">+{stock.change}</td>
+            {gainersLosersLoading ? (
+              <>
+                <SkeletonRow />
+                <SkeletonRow />
+                <SkeletonRow />
+                <SkeletonRow />
+                <SkeletonRow />
+              </>
+            ) : gainers.length > 0 ? (
+              gainers.map((stock, index) => (
+                <tr key={index}>
+                  <td>{stock.symbol}</td>
+                  <td>${stock.price.toFixed(2)}</td>
+                  <td className="green_text">{stock.change}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="no-data">
+                  No gainers data available
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -308,13 +359,29 @@ const HomePage = () => {
             </tr>
           </thead>
           <tbody>
-            {losers.map((stock, index) => (
-              <tr key={index}>
-                <td>{stock.symbol}</td>
-                <td>{stock.price.toFixed(2)}</td>
-                <td className="red_text">{stock.change}</td>
+            {gainersLosersLoading ? (
+              <>
+                <SkeletonRow />
+                <SkeletonRow />
+                <SkeletonRow />
+                <SkeletonRow />
+                <SkeletonRow />
+              </>
+            ) : losers.length > 0 ? (
+              losers.map((stock, index) => (
+                <tr key={index}>
+                  <td>{stock.symbol}</td>
+                  <td>${stock.price.toFixed(2)}</td>
+                  <td className="red_text">{stock.change}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="no-data">
+                  No losers data available
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

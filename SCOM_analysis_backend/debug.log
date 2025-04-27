@@ -547,3 +547,58 @@ Not Found: /predict_price/
 Not Found: /predict_price/
 $HS: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
 Not Found: /stock_data/
+$SCOM: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$KCB: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+
+1 Failed download:
+['EABL']: YFTzMissingError('possibly delisted; no timezone found')
+Internal Server Error: /train/
+
+1 Failed download:
+['NVDA']: ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\'query2.finance.yahoo.com\', port=443): Max retries exceeded with url: /v8/finance/chart/NVDA?range=1y&interval=1d&includePrePost=False&events=div%2Csplits%2CcapitalGains&crumb=qyUqjhlUP1F (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000014BF02E5310>: Failed to resolve \'query2.finance.yahoo.com\' ([Errno 11001] getaddrinfo failed)"))'))
+Bad Request: /predict/
+
+1 Failed download:
+['NVDA']: ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Read timed out. (read timeout=10)"))
+Bad Request: /predict/
+
+1 Failed download:
+['NVDA']: ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Read timed out. (read timeout=10)"))
+Bad Request: /predict/
+
+1 Failed download:
+
+1 Failed download:
+['NVDA']: ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Read timed out. (read timeout=10)"))
+['NVDA']: ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Read timed out. (read timeout=10)"))
+Bad Request: /predict/
+Bad Request: /predict/
+
+1 Failed download:
+['MSFT']: ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Read timed out. (read timeout=10)"))
+Bad Request: /predict/
+Failed to get ticker 'NFLX' reason: HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Max retries exceeded with url: /v8/finance/chart/NFLX?range=1d&interval=1d&crumb=qyUqjhlUP1F (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000014BF02E5310>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))
+$NFLX: possibly delisted; no timezone found
+Not Found: /stock_data/
+
+1 Failed download:
+['MSFT']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Max retries exceeded with url: /v8/finance/chart/MSFT?range=1y&interval=1d&includePrePost=False&events=div%2Csplits%2CcapitalGains&crumb=qyUqjhlUP1F (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000014BF020EAD0>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Bad Request: /predict/
+
+1 Failed download:
+['MSFT']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Max retries exceeded with url: /v8/finance/chart/MSFT?range=1y&interval=1d&includePrePost=False&events=div%2Csplits%2CcapitalGains&crumb=qyUqjhlUP1F (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000014BF020E210>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Bad Request: /predict/
+Internal Server Error: /predict/
+
+1 Failed download:
+['NVDA']: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='query2.finance.yahoo.com', port=443): Max retries exceeded with url: /v8/finance/chart/NVDA?range=1y&interval=1d&includePrePost=False&events=div%2Csplits%2CcapitalGains&crumb=qyUqjhlUP1F (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000014BF02E5310>: Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions'))"))
+Bad Request: /predict/
+Internal Server Error: /predict/
+$KPLC: possibly delisted; no timezone found
+Not Found: /stock_data/
+
+1 Failed download:
+['KPLC']: possibly delisted; no timezone found
+Bad Request: /predict/

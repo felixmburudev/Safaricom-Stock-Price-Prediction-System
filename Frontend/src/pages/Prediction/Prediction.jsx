@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
@@ -32,9 +31,16 @@ function Prediction() {
   const [ticker, setTicker] = useState(urlTicker || '');
   const [stockData, setStockData] = useState(null);
   const [predictionData, setPredictionData] = useState(null);
+  const [companyData, setCompanyData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [companyLoading, setCompanyLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [companyError, setCompanyError] = useState(null);
 
+  // Polygon.io API key (replace with your own)
+  const POLYGON_API_KEY = 'EYYzOPgbR0i2T9W_CmvyrDOLl0B9tEKP'; // Sign up at https://polygon.io to get a free API key
+
+  // Fetch stock data
   useEffect(() => {
     if (!ticker) return;
 
@@ -55,6 +61,31 @@ function Prediction() {
     };
 
     fetchStockData();
+  }, [ticker]);
+
+  // Fetch company data from Polygon.io
+  useEffect(() => {
+    if (!ticker) return;
+
+    const fetchCompanyData = async () => {
+      setCompanyLoading(true);
+      setCompanyError(null);
+
+      try {
+        const response = await axios.get(
+          `https://api.polygon.io/v3/reference/tickers/${ticker}?apiKey=${POLYGON_API_KEY}`
+        );
+        console.log('Company Data Response:', response.data);
+        setCompanyData(response.data.results);
+      } catch (err) {
+        console.error('Error fetching company data:', err);
+        setCompanyError('Failed to load company information');
+      } finally {
+        setCompanyLoading(false);
+      }
+    };
+
+    fetchCompanyData();
   }, [ticker]);
 
   const handlePredict = async () => {
@@ -150,8 +181,16 @@ function Prediction() {
   };
 
   return (
-    <div className="prediction container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Stock Price Prediction</h2>
+    <div style={{
+      padding: '20px',
+      maxWidth: '1200px',
+      margin: '0 auto'
+    }}>
+      <h2 style={{
+        fontSize: '24px',
+        fontWeight: 'bold',
+        marginBottom: '20px'
+      }}>Stock Price Prediction</h2>
 
       {!urlTicker && (
         <div>
@@ -160,6 +199,10 @@ function Prediction() {
             id="ticker-input"
             value={ticker}
             onChange={(e) => setTicker(e.target.value)}
+            style={{
+              padding: '5px',
+              marginBottom: '10px'
+            }}
           >
             <option value="">Select a company</option>
             {companies.map((company) => (
@@ -171,58 +214,136 @@ function Prediction() {
         </div>
       )}
 
-      <h3 className="text-xl mb-2">{ticker}</h3>
+      <div style={{
+        marginBottom: '10px'
+      }}>
+        {companyLoading && <p style={{ color: '#6b7280' }}>Loading company data...</p>}
+        {companyError && <p style={{ color: '#dc2626' }}>{companyError}</p>}
+        {companyData && (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '15px'
+          }}>
+            {companyData.branding?.logo_url && (
+              <img
+                src={companyData.branding.logo_url}
+                alt={`${companyData.name} Logo`}
+                style={{
+                  maxWidth: '100px',
+                  height: 'auto'
+                }}
+              />
+            )}
+            <div>
+              <h3 style={{
+                fontSize: '20px',
+                fontWeight: '600',
+                marginBottom: '5px'
+              }}>
+                {companyData.name} ({ticker})
+              </h3>
+              <p style={{
+                fontSize: '14px',
+                color: '#4b5563',
+                lineHeight: '1.5'
+              }}>
+                {companyData.description || 'No description available'}
+              </p>
+            </div>
+          </div>
+        )}
+        {!companyData && !companyLoading && !companyError && (
+          <h3 style={{
+            fontSize: '20px',
+            marginBottom: '10px'
+          }}>{ticker}</h3>
+        )}
+      </div>
+
       <PredictionButton onPredict={handlePredict} />
 
-      {isLoading && <p className="text-gray-500">Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {isLoading && <p style={{ color: '#6b7280' }}>Loading...</p>}
+      {error && <p style={{ color: '#dc2626' }}>{error}</p>}
 
-      <div className="mt-6">
-        {chartData ? (
-          <div className="chart-container bg-white p-4 rounded shadow">
-            <Line data={chartData} options={chartOptions} />
-          </div>
-        ) : (
-          !isLoading && <p className="text-gray-500">No stock data available</p>
-        )}
-
+      <div style={{ marginTop: '20px' }}>
         {predictionData && (
-          <div className="prediction-result mt-6">
-            <p className="text-lg">
+          <div style={{
+            marginBottom: '20px'
+          }}>
+            <p style={{
+              fontSize: '18px'
+            }}>
               Prediction:{' '}
-              <strong
-                className={
-                  predictionData.prediction === 1
-                    ? 'text-green-600'
-                    : 'text-red-600'
-                }
-              >
+              <strong style={{
+                color: predictionData.prediction === 1 ? '#16a34a' : '#dc2626'
+              }}>
                 {predictionData.prediction === 1 ? 'Price will rise' : 'Price will fall'}
               </strong>
             </p>
 
-            <div className="probabilities mt-4">
-              <h4 className="text-md font-semibold">Prediction Confidence</h4>
-              <div className="mt-2">
+            <div style={{
+              marginTop: '20px'
+            }}>
+              <h4 style={{
+                fontSize: '16px',
+                fontWeight: '600'
+              }}>Prediction Confidence</h4>
+              <div style={{
+                marginTop: '10px'
+              }}>
                 <p>Price will rise ({(predictionData.probability_class_1 * 100).toFixed(1)}%)</p>
-                <div className="w-full bg-gray-200 rounded-full h-4">
+                <div style={{
+                  width: '100%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '9999px',
+                  height: '16px'
+                }}>
                   <div
-                    className="bg-green-500 h-4 rounded-full"
-                    style={{ width: `${predictionData.probability_class_1 * 100}%` }}
+                    style={{
+                      backgroundColor: '#22c55e',
+                      height: '16px',
+                      borderRadius: '9999px',
+                      width: `${predictionData.probability_class_1 * 100}%`
+                    }}
                   />
                 </div>
               </div>
-              <div className="mt-2">
+              <div style={{
+                marginTop: '10px'
+              }}>
                 <p>Price will fall ({(predictionData.probability_class_0 * 100).toFixed(1)}%)</p>
-                <div className="w-full bg-gray-200 rounded-full h-4">
+                <div style={{
+                  width: '100%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '9999px',
+                  height: '16px'
+                }}>
                   <div
-                    className="bg-red-500 h-4 rounded-full"
-                    style={{ width: `${predictionData.probability_class_0 * 100}%` }}
+                    style={{
+                      backgroundColor: '#ef4444',
+                      height: '16px',
+                      borderRadius: '9999px',
+                      width: `${predictionData.probability_class_0 * 100}%`
+                    }}
                   />
                 </div>
               </div>
             </div>
           </div>
+        )}
+
+        {chartData ? (
+          <div style={{
+            backgroundColor: '#ffffff',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}>
+            <Line data={chartData} options={chartOptions} />
+          </div>
+        ) : (
+          !isLoading && <p style={{ color: '#6b7280' }}>No stock data available</p>
         )}
       </div>
     </div>

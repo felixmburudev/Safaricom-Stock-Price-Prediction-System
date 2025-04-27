@@ -12,7 +12,6 @@ import {
 } from 'chart.js';
 import '../../styles/AppStyles.css';
 
-// Register Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -32,11 +31,11 @@ const PredictionComponent = () => {
         setLoading(true);
         setPredictionData(null);
         try {
-            // Use GET with query parameter
+          
             const response = await fetch(`http://localhost:8000/predict_price/?ticker=${encodeURIComponent(ticker)}`, {
-                method: 'GET',  // Changed to GET
+                method: 'GET',  
                 headers: {
-                    'Content-Type': 'application/json',  // Still included, though optional for GET
+                    'Content-Type': 'application/json',  
                 },
             });
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
