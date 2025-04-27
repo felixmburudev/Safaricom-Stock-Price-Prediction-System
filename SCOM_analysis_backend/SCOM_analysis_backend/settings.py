@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-m$1x%*u34eh&x(im-p=la(x+br+ugmp-a7w&a87%+&imu7mctb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['stock-price-prediction-system-pqxs.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 
