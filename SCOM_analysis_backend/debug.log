@@ -605,3 +605,4 @@ Bad Request: /predict/
 Not Found: /
 Not Found: /favicon.ico
 C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader

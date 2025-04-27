@@ -1,1 +1,1 @@
-web: gunicorn SCOM_analysis_backend.wsgi:application --bind 0.0.0.0:$PORT 
+web: gunicorn SCOM_analysis_backend.wsgi:application --bind 0.0.0.0:$PORT
