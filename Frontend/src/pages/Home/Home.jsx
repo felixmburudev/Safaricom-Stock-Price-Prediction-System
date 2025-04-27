@@ -136,7 +136,7 @@ const HomePage = () => {
     setError('');
     try {
       const response = await fetch(
-        `http://localhost:8000/stock_data?ticker=${encodeURIComponent(ticker)}`,
+        `https://stock-price-prediction-system-pqxs.onrender.com/stock_data?ticker=${encodeURIComponent(ticker)}`,
         {
           method: 'GET',
           headers: {
