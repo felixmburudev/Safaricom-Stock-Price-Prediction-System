@@ -1,9 +1,14 @@
 # stocks/views.py
 from django.http import JsonResponse
 import yfinance as yf
+from django.http import HttpResponse
 from datetime import datetime, timedelta
 from django.core.management import call_command
 from .models import StockData
+
+
+def test(request):
+    return HttpResponse("Hello World")
 
 def get_stock_data(request):
     try:
