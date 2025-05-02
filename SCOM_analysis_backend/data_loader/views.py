@@ -1,33 +1,26 @@
 # stocks/views.py
 from django.http import JsonResponse
 import yfinance as yf
-from django.http import HttpResponse
 from datetime import datetime, timedelta
 from django.core.management import call_command
 from .models import StockData
 
-
-def test(request):
-    return HttpResponse("Hello World")
-
 def get_stock_data(request):
     try:
         start_date = "2024-03-20"
-        end_date = "2025-03-20"
+        end_date = "2025-04-27"
         ticker = request.GET.get('ticker', 'GOOGL').upper()
-        print(f"Received ticker: {ticker}")  # For debugging
-
+        print(f"Received ticker: {ticker}")  
         stock = yf.Ticker(ticker)
         data = stock.history(start=start_date, end=end_date)
 
-        # Check if data is empty
+       
         if data.empty:
             return JsonResponse(
                 {'error': 'No stock data found. Check the ticker symbol and date range.'},
                 status=404
             )
 
-        # Process valid data
         stock_data = {
             'dates': data.index.strftime('%Y-%m-%d').tolist(),
             'prices': data['Close'].tolist() if 'Close' in data else [],

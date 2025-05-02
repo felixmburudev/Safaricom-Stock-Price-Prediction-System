@@ -29,44 +29,26 @@ const HomePage = () => {
   const [losers, setLosers] = useState([]);
   const [error, setError] = useState('');
   const [ticker, setTicker] = useState('');
-  const [tickerFound, setTickerFound] = useState(null); // null, true, or false
+  const [tickerFound, setTickerFound] = useState(null);
   const [chartData, setChartData] = useState(null);
+  const [stockTableData, setStockTableData] = useState(null); // <-- New: Full stock data
   const [loading, setLoading] = useState(false);
-  const [gainersLosersLoading, setGainersLosersLoading] = useState(true); // New loading state
+  const [gainersLosersLoading, setGainersLosersLoading] = useState(true);
   const [showCompanies, setShowCompanies] = useState(false);
 
   useEffect(() => {
     const fetchTopStocks = async () => {
       setGainersLosersLoading(true);
       try {
-        const API_KEY = 'YOUR_API_KEY'; // Replace with your Alpha Vantage API key
+        const API_KEY = 'YOUR_API_KEY';
         const response = await fetch(
           `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${API_KEY}`
         );
 
-        if (!response.ok) {
-          const text = await response.text();
-          console.error('Top Gainers/Losers API error:', response.status, text);
-          throw new Error(`HTTP ${response.status}: ${text.slice(0, 100)}...`);
-        }
-
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-          const text = await response.text();
-          console.error('Non-JSON response:', text.slice(0, 200));
-          throw new Error('Expected JSON, got: ' + text.slice(0, 100) + '...');
-        }
+        if (!response.ok) throw new Error('Failed to fetch Top Gainers/Losers');
 
         const data = await response.json();
-        console.log('Top Gainers/Losers data:', data);
-
-        if (data.Information || data.Error) {
-          throw new Error(data.Information || data.Error || 'Invalid API response');
-        }
-
-        if (!data.top_gainers || !data.top_losers) {
-          throw new Error('Missing top_gainers or top_losers in response');
-        }
+        if (!data.top_gainers || !data.top_losers) throw new Error('Missing data');
 
         const processStocks = (stocks) =>
           stocks.slice(0, 5).map((stock) => ({
@@ -80,7 +62,6 @@ const HomePage = () => {
         setLosers(processStocks(data.top_losers));
         setError('');
       } catch (err) {
-        console.error('Error fetching market movers:', err);
         setError('Failed to load Top Gainers and Losers: ' + err.message);
         setGainers([]);
         setLosers([]);
@@ -136,48 +117,27 @@ const HomePage = () => {
     setError('');
     try {
       const response = await fetch(
-        `https://stock-price-prediction-system-pqxs.onrender.com/stock_data?ticker=${encodeURIComponent(ticker)}`,
+        `http://localhost:8000/stock_data?ticker=${encodeURIComponent(ticker)}`,
         {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         }
       );
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers));
-
-      if (!response.ok) {
-        const text = await response.text();
-        console.error('Non-OK response:', response.status, text.slice(0, 200));
-        throw new Error(`Server returned ${response.status}: ${text.slice(0, 100)}...`);
-      }
-
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        const text = await response.text();
-        console.error('Non-JSON response:', text.slice(0, 200));
-        throw new Error('Expected JSON, got: ' + text.slice(0, 100) + '...');
-      }
+      if (!response.ok) throw new Error('Failed to fetch stock data');
 
       const data = await response.json();
-      console.log('Received data:', data);
 
       if (!data.dates || !data.prices) {
-        console.error('Invalid data format:', data);
         throw new Error('Invalid data format: missing dates or prices');
       }
 
-      const labels = data.dates;
-      const prices = data.prices;
-
       setChartData({
-        labels,
+        labels: data.dates,
         datasets: [
           {
             label: `${ticker.toUpperCase()} Closing Price`,
-            data: prices,
+            data: data.prices,
             borderColor: 'rgb(75, 192, 192)',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             tension: 0.1,
@@ -185,16 +145,28 @@ const HomePage = () => {
           },
         ],
       });
+
+      // Set full stock data for table
+      const fullData = data.dates.map((date, idx) => ({
+        date,
+        open: data.opens[idx],
+        high: data.highs[idx],
+        low: data.lows[idx],
+        close: data.prices[idx],
+        volume: data.volumes[idx],
+      }));
+
+      setStockTableData(fullData);
+
     } catch (err) {
-      console.error('Error fetching stock data:', err);
       setError('Failed to load stock data: ' + err.message);
       setChartData(null);
+      setStockTableData(null);
     } finally {
       setLoading(false);
     }
   };
 
-  // Skeleton Loader Component
   const SkeletonRow = () => (
     <tr>
       <td><div className="skeleton skeleton-cell"></div></td>
@@ -206,10 +178,11 @@ const HomePage = () => {
   return (
     <div className="container">
       <h1 className="main-heading">Stock Dashboard</h1>
+      <p className='wl_para'>Welcome to our Stock Price Prediction System...</p>
 
       {error && <p className="error">{error}</p>}
 
-      {/* Search Input, Companies Button, and Ticker Status */}
+      {/* Search Section */}
       <div className="search-section">
         <input
           type="text"
@@ -221,7 +194,6 @@ const HomePage = () => {
         <button
           onClick={toggleCompaniesList}
           className="companies-button"
-          title="Show company list"
         >
           {showCompanies ? 'Hide Companies' : 'Show Companies'}
         </button>
@@ -229,16 +201,12 @@ const HomePage = () => {
           {loading ? 'Loading...' : 'View Stock Data'}
         </button>
         <div className="ticker-status">
-          {tickerFound === true && (
-            <span className="ticker-found">Ticker Found: {ticker}</span>
-          )}
-          {tickerFound === false && ticker && (
-            <span className="ticker-not-found">No Ticker Found</span>
-          )}
+          {tickerFound === true && <span className="ticker-found">Ticker Found: {ticker}</span>}
+          {tickerFound === false && ticker && <span className="ticker-not-found">No Ticker Found</span>}
         </div>
       </div>
 
-      {/* Companies List Dropdown */}
+      {/* Companies List */}
       {showCompanies && (
         <div className="companies-list">
           <h3>Available Companies</h3>
@@ -256,7 +224,7 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Line Chart */}
+      {/* Chart Section */}
       {chartData && (
         <div className="chart-section">
           <h2>Historical Closing Prices for {ticker}</h2>
@@ -265,39 +233,52 @@ const HomePage = () => {
             options={{
               responsive: true,
               plugins: {
-                legend: {
-                  position: 'top',
-                },
-                title: {
-                  display: true,
-                  text: 'Stock Closing Prices',
-                },
-                tooltip: {
-                  mode: 'index',
-                  intersect: false,
-                },
+                legend: { position: 'top' },
+                title: { display: true, text: 'Stock Closing Prices' },
+                tooltip: { mode: 'index', intersect: false },
               },
               scales: {
                 y: {
                   beginAtZero: false,
-                  title: {
-                    display: true,
-                    text: 'Price ($)',
-                  },
+                  title: { display: true, text: 'Price ($)' },
                 },
                 x: {
-                  title: {
-                    display: true,
-                    text: 'Date',
-                  },
+                  title: { display: true, text: 'Date' },
                 },
               },
-              hover: {
-                mode: 'nearest',
-                intersect: true,
-              },
+              hover: { mode: 'nearest', intersect: true },
             }}
           />
+        </div>
+      )}
+
+      {stockTableData && (
+        <div className="table-section">
+          <h2>Stock Data Table for {ticker}</h2>
+          <table className="stock-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Open</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Close</th>
+                <th>Volume</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stockTableData.map((row, idx) => (
+                <tr key={idx}>
+                  <td>{row.date}</td>
+                  <td>${row.open.toFixed(2)}</td>
+                  <td>${row.high.toFixed(2)}</td>
+                  <td>${row.low.toFixed(2)}</td>
+                  <td>${row.close.toFixed(2)}</td>
+                  <td>{row.volume.toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
 
@@ -323,11 +304,7 @@ const HomePage = () => {
           <tbody>
             {gainersLosersLoading ? (
               <>
-                <SkeletonRow />
-                <SkeletonRow />
-                <SkeletonRow />
-                <SkeletonRow />
-                <SkeletonRow />
+                <SkeletonRow /><SkeletonRow /><SkeletonRow /><SkeletonRow /><SkeletonRow />
               </>
             ) : gainers.length > 0 ? (
               gainers.map((stock, index) => (
@@ -338,16 +315,13 @@ const HomePage = () => {
                 </tr>
               ))
             ) : (
-              <tr>
-                <td colSpan="3" className="no-data">
-                  No gainers data available
-                </td>
-              </tr>
+              <tr><td colSpan="3">No gainers data available</td></tr>
             )}
           </tbody>
         </table>
       </div>
 
+      {/* Top Losers */}
       <div className="section">
         <h2 className="section-heading red">Top Losers</h2>
         <table className="stock-table">
@@ -361,11 +335,7 @@ const HomePage = () => {
           <tbody>
             {gainersLosersLoading ? (
               <>
-                <SkeletonRow />
-                <SkeletonRow />
-                <SkeletonRow />
-                <SkeletonRow />
-                <SkeletonRow />
+                <SkeletonRow /><SkeletonRow /><SkeletonRow /><SkeletonRow /><SkeletonRow />
               </>
             ) : losers.length > 0 ? (
               losers.map((stock, index) => (
@@ -376,11 +346,7 @@ const HomePage = () => {
                 </tr>
               ))
             ) : (
-              <tr>
-                <td colSpan="3" className="no-data">
-                  No losers data available
-                </td>
-              </tr>
+              <tr><td colSpan="3">No losers data available</td></tr>
             )}
           </tbody>
         </table>

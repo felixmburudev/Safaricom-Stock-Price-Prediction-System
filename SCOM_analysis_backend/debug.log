@@ -617,3 +617,80 @@ C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\s
 Watching for file changes with StatReloader
 C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\settings.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\SCOM_analysis_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+$KEGN: possibly delisted; no timezone found
+Not Found: /stock_data/
+$SCOM: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$SCOM: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+$KCB: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$SCOM: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$KEGN: possibly delisted; no timezone found
+Not Found: /stock_data/
+
+1 Failed download:
+['KEGN']: YFPricesMissingError('possibly delisted; no price data found  (period=1y) (Yahoo error = "No data found, symbol may be delisted")')
+Bad Request: /predict/
+Internal Server Error: /predict/
+$SCOM: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$SCOM: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /train_batch/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /train_batch/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\random_forest\train_model.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+$SCOM: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+$EABL: possibly delisted; no timezone found
+Not Found: /stock_data/
+$BAT: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+
+1 Failed download:
+['BAT']: YFPricesMissingError('possibly delisted; no price data found  (period=1y)')
+Bad Request: /predict/
+$AMZN: possibly delisted; no price data found  (1d 2024-03-20 -> 2025-03-20)
+Not Found: /stock_data/
+Watching for file changes with StatReloader
+$EABL: possibly delisted; no timezone found
+Not Found: /stock_data/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+Internal Server Error: /stock_data/
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\mburson\Desktop\myproject\SCOM_analysis_backend\data_loader\views.py changed, reloading.
+Watching for file changes with StatReloader

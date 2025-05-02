@@ -24,7 +24,6 @@ from random_forest.views import train_model_view, train_batch_model_view , get_t
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', views.test, name='test'),
     path('stock_data/', views.get_stock_data, name='stock_data'),
     path('saved-stock-data/', views.get_saved_stock_data, name='get_saved_stock_data'), 
     path('train/', train_model_view, name='train_model'),

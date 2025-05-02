@@ -6,7 +6,13 @@
   align-items: center;
   flex-wrap: wrap;
 }
-
+.wl_para{
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  padding: 10px ;
+  text-align: center;
+}
 .search-input {
   padding: 10px;
   font-size: 16px;
